@@ -52,7 +52,7 @@ Now that we have the subset of data we want (`news.csv`), we can use [`mongoimpo
 1. Open another terminal, navigate to the same directory, and run the following `mongoimport` command (be sure to update with your own connection string and credentials!):
 
     ```mongodb
-    mongoimport --uri mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/DATABASE --collection COLLECTION --type=tsv --file news.csv --fieldFile=fields.txt --columnsHaveTypes
+    mongoimport --uri mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/DATABASE --db="GDELT" --collection="news" --type="tsv" --fieldFile="fields.txt" --columnsHaveTypes --parseGrace="skipField" --file "news.csv"
     ```
 
     Some notes: 
