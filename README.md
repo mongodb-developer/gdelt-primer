@@ -11,16 +11,25 @@ These are the steps I performed to grab data from the main GDELT dataset, import
 
 1. Download main GDELT file
 
-    I used [gdelttools](https://github.com/jdrumgoole/gdelttools) to do this. Once you've cloned the gdelttools repo, navigate to that directory and run the following command:
+    I used [gdelttools](https://github.com/jdrumgoole/gdelttools) to do this.
+
+    Clone the repo and navigate to the new directory:
+    ```shell
+    git clone https://github.com/jdrumgoole/gdelttools.git
+    cd gdelttools
+    ```
+    Follow the [instructions to install GDELT tools](https://github.com/jdrumgoole/gdelttools#installation).
+
+    Once you have gdelttools installed, run the following command:
 
     ```python
-    python gdelttools\gdeltloader.py --ziplist master
+    python3 gdelttools/gdeltloader.py --master
     ```
 
 2. Reduce main file to the amount of days you want (number passed to the `tail` command) and only export archives. I went with `120` days:
 
     ```bash
-    grep export gdelt_master-file-*.txt | tail -n 120 > last_120_days.txt
+    grep export gdelt-update-file-*.txt | tail -n 120 > last_120_days.txt
     ```
 
 3. Extract URLs from the condensed file (`last_120_days.txt` file) and download them via [cURL](https://everything.curl.dev/) commands:
