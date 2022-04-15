@@ -52,7 +52,7 @@ Now that we have the subset of data we want (`news.csv`), we can use [`mongoimpo
 1. Open another terminal, navigate to the same directory, and run the following `mongoimport` command (be sure to update with your own connection string and credentials!):
 
     ```mongodb
-    mongoimport --uri mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/DATABASE --db="GDELT" --collection="news" --type="tsv" --fieldFile="fields.txt" --columnsHaveTypes --parseGrace="skipField" --file "news.csv"
+    mongoimport --uri mongodb+srv://USERNAME:PASSWORD@CLUSTER.mongodb.net/DATABASE --db="GDELT" --collection="recentEvents" --type="tsv" --fieldFile="fields.txt" --columnsHaveTypes --parseGrace="skipField" --file "recentEvents.csv"
     ```
 
     Some notes: 
@@ -67,7 +67,7 @@ With our data now in MongoDB Atlas, we have some cleanup to do. The next steps r
 
 1. Convert raw latitude, longitude strings to double type. Then, create GeoJSON points out of them. You can do this by running the `convert-geojson-pipeline.mongodb` aggregation. 
 
-2. Compress the documents. You can do this by running the `compress-pipeline.mongodb` aggregation.
+2.Reshape Actor1, Actor2, and Action fields into subdocuments. You can do this by running the `reshape-subdocs-pipeline.mongodb` aggregation.
 
 
 ## News Record Walkthrough

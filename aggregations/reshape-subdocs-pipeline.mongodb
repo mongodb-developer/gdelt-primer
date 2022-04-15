@@ -1,12 +1,12 @@
 /* 
-Aggregation pipeline to compress Actor1, Actor2, and Action fields into it's own subdocument.
+Aggregation pipeline to reshape Actor1, Actor2, and Action fields into subdocuments.
 */
 
 // Select the database to use.
-use('recentEvents');
+use('GDELT');
 
-// Build an aggregation pipeline to compress Actor1, Actor2, and Action fields into it's own subdocument.
-const compressAggregation = [
+// Build an aggregation pipeline to reshape Actor1, Actor2, and Action fields into it's own subdocument.
+const reshapeAggregation = [
     {
         $match: {
             Actor1Name: {"$type": "string"},
@@ -149,8 +149,8 @@ const compressAggregation = [
         ]
     },
     {
-        $out: "last120DaysCompressed"
+        $out: "recentEvents"
     }
 ];
 
-db.last120Days.aggregate(compressAggregation);
+db.recentEvents.aggregate(reshapeAggregation);
