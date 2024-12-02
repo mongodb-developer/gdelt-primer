@@ -5,7 +5,7 @@ Deletes individual lat, long fields after adding GeoJSON point equivalents.
 */
 
 // Select the database to use.
-use('recentEvents');
+use('GDELT');
 
 // Build an aggregation pipeline to convert raw GDELT lat, long strings to double type and geoJSON points.
 const convertAggregation = [
@@ -54,7 +54,7 @@ const convertAggregation = [
             "Actor2Geo_Long"
         ]
     },
-    { $out: "last120Days" }
+    { $out: "recentEvents" }
 ];
 
-db.last120DaysRaw.aggregate(convertAggregation);
+db.recentEvents.aggregate(convertAggregation);
